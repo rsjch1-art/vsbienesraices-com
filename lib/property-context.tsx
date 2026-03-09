@@ -12,7 +12,7 @@ export interface Property {
   bathrooms: number
   area: number
   type: 'casa' | 'departamento' | 'terreno' | 'comercial'
-  image: string
+  images: string[]
   featured: boolean
   createdAt: string
 }
@@ -27,90 +27,32 @@ interface PropertyContextType {
 const PropertyContext = createContext<PropertyContextType | undefined>(undefined)
 
 const defaultProperties: Property[] = [
-  {
-    id: '1',
-    title: 'Residencia de Lujo en Polanco',
-    description: 'Espectacular residencia con acabados de primera, amplios espacios y jardín privado. Ubicada en una de las zonas más exclusivas de la ciudad.',
-    price: 15500000,
-    location: 'Polanco, Ciudad de México',
-    bedrooms: 5,
-    bathrooms: 4,
-    area: 450,
-    type: 'casa',
-    image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop',
-    featured: true,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '2',
-    title: 'Penthouse con Vista al Mar',
-    description: 'Increíble penthouse con terraza panorámica y vista espectacular al océano. Amenidades de primer nivel.',
-    price: 22000000,
-    location: 'Cancún, Quintana Roo',
-    bedrooms: 4,
-    bathrooms: 3,
-    area: 320,
-    type: 'departamento',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop',
-    featured: true,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '3',
-    title: 'Casa Moderna en San Pedro',
-    description: 'Diseño arquitectónico contemporáneo con materiales de alta calidad y tecnología inteligente integrada.',
-    price: 18500000,
-    location: 'San Pedro Garza García, Nuevo León',
-    bedrooms: 4,
-    bathrooms: 5,
-    area: 520,
-    type: 'casa',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
-    featured: true,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '4',
-    title: 'Departamento en Santa Fe',
-    description: 'Elegante departamento en torre de lujo con amenidades completas y excelente ubicación.',
-    price: 8500000,
-    location: 'Santa Fe, Ciudad de México',
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 180,
-    type: 'departamento',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
-    featured: false,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '5',
-    title: 'Terreno en Valle de Bravo',
-    description: 'Terreno premium con vista al lago, ideal para construir la casa de tus sueños en un entorno natural único.',
-    price: 4500000,
-    location: 'Valle de Bravo, Estado de México',
-    bedrooms: 0,
-    bathrooms: 0,
-    area: 2500,
-    type: 'terreno',
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=600&fit=crop',
-    featured: false,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '6',
-    title: 'Villa Frente al Mar',
-    description: 'Exclusiva villa con acceso directo a la playa, piscina infinity y acabados de diseñador.',
-    price: 35000000,
-    location: 'Puerto Vallarta, Jalisco',
-    bedrooms: 6,
-    bathrooms: 7,
-    area: 650,
-    type: 'casa',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
-    featured: true,
-    createdAt: new Date().toISOString()
-  }
+{
+id: '1',
+title: 'Casa en Venta SMA - 3 MDP',
+description: 'Casa en venta por 3,000,000 MXN. ⚠️ NO INCLUYE GASTOS NOTARIALES.',
+price: 3000000,
+location: 'San Miguel de Allende, Guanajuato',
+bedrooms: 3,
+bathrooms: 2,
+area: 180,
+type: 'casa',
+images: [
+'/Venta SMA 3 MDP (15).jpg',
+'/Venta SMA 3 MDP (14).jpg',
+'/Venta SMA 3 MDP (16).jpg',
+'/Venta SMA 3 MDP (9).jpg',
+'/Venta SMA 3 MDP (6).jpg',
+'/Venta SMA 3 MDP (5).jpg',
+'/Venta SMA 3 MDP (4).jpg',
+'/Venta SMA 3 MDP (3).jpg',
+'/Venta SMA 3 MDP (2).jpg',
+'/Venta SMA 3 MDP (1).jpg',
+'/Venta SMA 3 MDP (10).jpg'
+],
+featured: true,
+createdAt: new Date().toISOString()
+}
 ]
 
 export function PropertyProvider({ children }: { children: ReactNode }) {
