@@ -7,111 +7,124 @@ import { MapPin, Bed, Bath, Maximize } from "lucide-react"
 
 export function PropertyCard({ property }: any) {
 
-  const [index, setIndex] = useState(0)
+// Asegura que siempre haya un arreglo de imágenes
+const images = property.images && property.images.length
+? property.images
+: property.image
+? [property.image]
+: ["/placeholder.jpg"]
 
-  const next = () => {
-    setIndex((prev) => (prev + 1) % property.images.length)
-  }
+const [index, setIndex] = useState(0)
 
-  const prev = () => {
-    setIndex((prev) =>
-      prev === 0 ? property.images.length - 1 : prev - 1
-    )
-  }
+const next = () => {
+setIndex((prev) => (prev + 1) % images.length)
+}
 
-  const formattedPrice = new Intl.NumberFormat("es-MX", {
-    style: "currency",
-    currency: "MXN",
-    maximumFractionDigits: 0
-  }).format(property.price)
+const prev = () => {
+setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+}
 
-  return (
-    <Link href={`/propiedades/${property.id}`}>
-      <div className="border rounded-xl overflow-hidden hover:shadow-xl transition">
+const formattedPrice = new Intl.NumberFormat("es-MX", {
+style: "currency",
+currency: "MXN",
+maximumFractionDigits: 0
+}).format(property.price)
 
-        <div className="relative h-64">
+return (
+<Link href={`/propiedades/${property.id}`}> <div className="border rounded-xl overflow-hidden hover:shadow-xl transition">
 
-          <Image
-            src={property.images[index]}
-            alt={property.title}
-            fill
-            className="object-cover"
-          />
+```
+    <div className="relative h-64">
 
-          {property.images.length > 1 && (
-            <>
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  prev()
-                }}
-                className="absolute left-3 top-1/2 bg-white px-2 py-1 rounded"
-              >
-                ‹
-              </button>
+      <Image
+        src={images[index]}
+        alt={property.title}
+        fill
+        className="object-cover"
+      />
 
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  next()
-                }}
-                className="absolute right-3 top-1/2 bg-white px-2 py-1 rounded"
-              >
-                ›
-              </button>
-            </>
-          )}
-        </div>
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              prev()
+            }}
+            className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 px-2 py-1 rounded"
+          >
+            ‹
+          </button>
 
-        <div className="p-5">
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              next()
+            }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 px-2 py-1 rounded"
+          >
+            ›
+          </button>
+        </>
+      )}
+    </div>
 
-          <p className="text-sm text-gray-500 flex gap-1 items-center">
-            <MapPin size={14} />
-            {property.location}
-          </p>
+    <div className="p-5">
 
-          <h3 className="text-lg font-semibold mt-1">
-            {property.title}
-          </h3>
+      <p className="text-sm text-gray-500 flex gap-1 items-center">
+        <MapPin size={14} />
+        {property.location}
+      </p>
 
-          <p className="text-sm text-gray-500 mt-1">
-            {property.description}
-          </p>
+      <h3 className="text-lg font-semibold mt-1">
+        {property.title}
+      </h3>
 
-          <div className="flex gap-4 mt-3 text-sm">
+      <p className="text-sm text-gray-500 mt-1">
+        {property.description}
+      </p>
 
-            <span className="flex items-center gap-1">
-              <Bed size={16} />
-              {property.bedrooms}
-            </span>
+      <div className="flex gap-4 mt-3 text-sm">
 
-            <span className="flex items-center gap-1">
-              <Bath size={16} />
-              {property.bathrooms}
-            </span>
+        {property.bedrooms && (
+          <span className="flex items-center gap-1">
+            <Bed size={16} />
+            {property.bedrooms}
+          </span>
+        )}
 
-            <span className="flex items-center gap-1">
-              <Maximize size={16} />
-              {property.area} m²
-            </span>
+        {property.bathrooms && (
+          <span className="flex items-center gap-1">
+            <Bath size={16} />
+            {property.bathrooms}
+          </span>
+        )}
 
-          </div>
-
-          <div className="mt-4 pt-3 border-t">
-
-            <p className="text-xl font-bold text-blue-600">
-              {formattedPrice}
-            </p>
-
-            <p className="text-xs text-gray-500">
-              El precio no incluye gastos de escrituración ni impuestos.
-            </p>
-
-          </div>
-
-        </div>
+        {property.area && (
+          <span className="flex items-center gap-1">
+            <Maximize size={16} />
+            {property.area} m²
+          </span>
+        )}
 
       </div>
-    </Link>
-  )
+
+      <div className="mt-4 pt-3 border-t">
+
+        <p className="text-xl font-bold text-blue-600">
+          {formattedPrice}
+        </p>
+
+        <p className="text-xs text-gray-500">
+          El precio no incluye gastos de escrituración ni impuestos.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</Link>
+```
+
+)
 }
