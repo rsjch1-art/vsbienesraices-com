@@ -1,1 +1,57 @@
+'use client';
+import { useState } from 'react';
 
+const ADMIN_USER = 'rsjch1@gmail.com';
+const ADMIN_PASS = 'miriam*1';
+
+export default function AdminPage() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState('');
+  const [pass, setPass] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (user === ADMIN_USER && pass === ADMIN_PASS) {
+      setLoggedIn(true);
+    } else {
+      setError('Usuario o contraseña incorrecta');
+    }
+  };
+
+  if (!loggedIn) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <h1 className="text-3xl font-bold mb-4">Panel Admin VS Bienes Raíces</h1>
+        <form onSubmit={handleLogin} className="flex flex-col gap-2">
+          <input
+            type="text"
+            placeholder="Usuario"
+            value={user}
+            onChange={(e) => setUser(e.target.value)}
+            className="p-2 border rounded"
+          />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            className="p-2 border rounded"
+          />
+          {error && <p className="text-red-500">{error}</p>}
+          <button type="submit" className="bg-blue-500 text-white p-2 rounded mt-2">
+            Entrar
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-8 bg-gray-50 min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">Panel de Administración</h1>
+      <p>Bienvenido, mamá 😄. Aquí podrá editar las casas.</p>
+      {/* Aquí agregaremos la gestión de casas */}
+    </div>
+  );
+}
