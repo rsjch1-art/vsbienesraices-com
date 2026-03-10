@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { DM_Sans, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import '../styles/globals.css'
+import '../styles/globals.css';
 
 const dmSans = DM_Sans({ 
   subsets: ["latin"],
